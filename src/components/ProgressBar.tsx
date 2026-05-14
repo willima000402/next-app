@@ -1,13 +1,12 @@
 "use client";
 
 interface ProgressBarProps {
-  current: number; // 0-based index of active step
+  current: number;
   total: number;
 }
 
 export function ProgressBar({ current, total }: ProgressBarProps) {
-  const completed = current; // steps before the active one
-  const pct = total === 0 ? 0 : Math.round((completed / total) * 100);
+  const pct = total === 0 ? 0 : Math.round((current / total) * 100);
 
   return (
     <div className="w-full">
@@ -17,9 +16,9 @@ export function ProgressBar({ current, total }: ProgressBarProps) {
         </span>
         <span>{pct}% complete</span>
       </div>
-      <div className="h-2 w-full rounded-full bg-slate-100 overflow-hidden">
+      <div className="h-1.5 w-full rounded-full bg-white/8 overflow-hidden">
         <div
-          className="h-full rounded-full bg-indigo-500 transition-all duration-500 ease-out"
+          className="h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all duration-500 ease-out"
           style={{ width: `${pct}%` }}
         />
       </div>

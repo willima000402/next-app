@@ -13,19 +13,19 @@ export function PriorAnswersPanel({ steps, acceptedAnswers }: PriorAnswersPanelP
   if (entries.length === 0) return null;
 
   return (
-    <aside className="rounded-xl border border-slate-200 bg-slate-50 p-4">
-      <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+    <aside className="rounded-xl border border-white/8 bg-slate-900 p-4">
+      <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
         Accepted Answers
       </h3>
       <div className="space-y-3">
         {entries.map(([stepId, answer]) => {
           const step = steps.find((s) => String(s.id) === stepId);
           return (
-            <div key={stepId} className="rounded-lg bg-white border border-slate-200 px-3 py-2.5">
-              <p className="text-[10px] font-semibold text-indigo-600 uppercase tracking-wide mb-1">
+            <div key={stepId} className="rounded-lg bg-slate-800/60 border border-white/6 px-3 py-2.5">
+              <p className="text-[10px] font-semibold text-violet-400 uppercase tracking-wide mb-1">
                 Step {stepId}{step ? ` – ${step.title}` : ""}
               </p>
-              <p className="text-xs text-slate-600 leading-relaxed line-clamp-3">{answer}</p>
+              <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">{answer}</p>
             </div>
           );
         })}

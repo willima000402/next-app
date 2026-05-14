@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { ErrorBanner } from "@/components/ErrorBanner";
 
-// Reusable example goals – editable to match any domain
 const EXAMPLES = [
   "Help me learn how to solve a linear equation",
   "Guide me through writing a project brief",
@@ -28,27 +27,36 @@ export function StartScreen({ onStart, error }: StartScreenProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-indigo-50 flex items-center justify-center px-4 py-16">
-      <div className="w-full max-w-2xl">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-violet-950 to-slate-900 flex items-center justify-center px-4 py-16">
+      {/* Ambient glow */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 left-1/2 -translate-x-1/2 h-[500px] w-[800px] rounded-full bg-violet-600/20 blur-[120px]" />
+        <div className="absolute bottom-0 right-0 h-[300px] w-[400px] rounded-full bg-fuchsia-600/10 blur-[100px]" />
+      </div>
+
+      <div className="relative w-full max-w-2xl">
         {/* Header */}
         <div className="text-center mb-10">
-          <div className="inline-flex items-center justify-center h-14 w-14 rounded-2xl bg-indigo-600 mb-5 shadow-lg shadow-indigo-200">
-            <svg className="h-7 w-7 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.347.347a3.5 3.5 0 01-4.95 0l-.347-.347z" />
+          {/* Logo mark */}
+          <div className="inline-flex items-center justify-center h-16 w-16 rounded-2xl mb-5 shadow-2xl shadow-violet-900/60 bg-gradient-to-br from-violet-500 to-fuchsia-600">
+            <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.75}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M12 3c-1.2 5.4-5 7.8-9 9 4 1.2 7.8 3.6 9 9 1.2-5.4 5-7.8 9-9-4-1.2-7.8-3.6-9-9z" />
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">AI Learning Guide</h1>
-          <p className="mt-3 text-base text-slate-500 max-w-md mx-auto leading-relaxed">
-            Enter any learning goal, task, or process. The AI will create a personalized
-            step-by-step plan and guide you through it.
+          <h1 className="text-4xl font-bold text-white tracking-tight">
+            Steply
+          </h1>
+          <p className="mt-3 text-base text-slate-400 max-w-md mx-auto leading-relaxed">
+            Enter any learning goal, task, or process. Steply creates a
+            personalized step-by-step plan and guides you through it.
           </p>
         </div>
 
         {/* Form card */}
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-200 p-8">
+        <div className="rounded-2xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl shadow-black/40 p-8">
           <form onSubmit={handleSubmit} className="space-y-5">
             <div>
-              <label htmlFor="goal" className="block text-sm font-semibold text-slate-700 mb-2">
+              <label htmlFor="goal" className="block text-sm font-semibold text-slate-200 mb-2">
                 What do you want to learn or accomplish?
               </label>
               <textarea
@@ -57,9 +65,9 @@ export function StartScreen({ onStart, error }: StartScreenProps) {
                 value={goal}
                 onChange={(e) => setGoal(e.target.value)}
                 placeholder="e.g. Help me learn how to solve a linear equation..."
-                className="w-full rounded-xl border border-slate-300 bg-slate-50 px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-indigo-400 focus:border-transparent resize-none transition"
+                className="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white placeholder:text-slate-500 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent resize-none transition"
               />
-              <p className="mt-1.5 text-xs text-slate-400">
+              <p className="mt-1.5 text-xs text-slate-500">
                 Be specific for best results. Any domain works — education, training, workflow, writing.
               </p>
             </div>
@@ -69,7 +77,7 @@ export function StartScreen({ onStart, error }: StartScreenProps) {
             <button
               type="submit"
               disabled={goal.trim().length < 5}
-              className="w-full rounded-xl bg-indigo-600 px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-700 active:scale-[0.98] disabled:opacity-40 disabled:cursor-not-allowed transition-all"
+              className="w-full rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 px-6 py-3.5 text-sm font-semibold text-white shadow-lg shadow-violet-900/40 hover:from-violet-500 hover:to-fuchsia-500 active:scale-[0.98] disabled:opacity-30 disabled:cursor-not-allowed transition-all"
             >
               Generate My Step-by-Step Plan →
             </button>
@@ -77,7 +85,7 @@ export function StartScreen({ onStart, error }: StartScreenProps) {
 
           {/* Example prompts */}
           <div className="mt-7">
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400 mb-3">
+            <p className="text-xs font-semibold uppercase tracking-wider text-slate-500 mb-3">
               Or try an example
             </p>
             <div className="flex flex-wrap gap-2">
@@ -86,7 +94,7 @@ export function StartScreen({ onStart, error }: StartScreenProps) {
                   key={ex}
                   type="button"
                   onClick={() => setGoal(ex)}
-                  className="rounded-lg border border-slate-200 bg-slate-50 px-3 py-1.5 text-xs text-slate-600 hover:bg-indigo-50 hover:border-indigo-200 hover:text-indigo-700 transition-colors"
+                  className="rounded-lg border border-white/10 bg-white/5 px-3 py-1.5 text-xs text-slate-400 hover:bg-violet-500/20 hover:border-violet-400/30 hover:text-violet-300 transition-colors"
                 >
                   {ex}
                 </button>
@@ -96,8 +104,8 @@ export function StartScreen({ onStart, error }: StartScreenProps) {
         </div>
 
         {/* Footer tagline */}
-        <p className="text-center mt-6 text-xs text-slate-400">
-          Powered by AI · Works for any learning goal, training flow, or process
+        <p className="text-center mt-6 text-xs text-slate-600">
+          Steply · AI-guided learning for any goal, domain, or workflow
         </p>
       </div>
     </div>
