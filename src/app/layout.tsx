@@ -13,9 +13,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AI Learning Guide",
+  title: "Steply",
   description:
-    "AI-powered step-by-step guided learning and workflow assistant. Enter any goal and get a personalised plan.",
+    "Steply — AI-powered step-by-step guided learning. Enter any goal and get a personalized plan.",
 };
 
 export default function RootLayout({
